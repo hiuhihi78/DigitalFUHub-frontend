@@ -3,8 +3,7 @@ FROM node:18-alpine AS build
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-# Falls back to npm install if package-lock.json is out of sync with package.json
-RUN npm ci --no-audit --no-fund || npm install --no-audit --no-fund
+RUN npm ci --no-audit --no-fund
 
 COPY . .
 
