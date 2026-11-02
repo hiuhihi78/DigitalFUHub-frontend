@@ -1,4 +1,5 @@
 import React from 'react';
+import config from '~/config';
 import { AuthProvider } from 'react-auth-kit';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -10,7 +11,7 @@ import Auth from './routes/Auth';
 import ContextContainer from './context/ContextContainer';
 //import refreshToken from '~/api/refreshToken';
 
-const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID
+const GOOGLE_CLIENT_ID = config.googleClientId
 
 function App() {
     return (

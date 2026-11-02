@@ -7,7 +7,7 @@ RUN npm ci --no-audit --no-fund
 
 COPY . .
 
-# REACT_APP_* values are baked into the JS at build time
+# Optional build-time fallback (used only when the container gets no WEB_* variables)
 ARG REACT_APP_API_BASE_URL
 ARG REACT_APP_GOOGLE_CLIENT_ID
 ARG REACT_APP_TOKEN_EXPIRES_TIME
@@ -23,4 +23,7 @@ RUN npm run build
 FROM nginx:1.27-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/build /usr/share/nginx/html
+# Writes env-config.js from WEB_* variables at start-up (nginx runs /docker-entrypoint.d/*.sh)
+COPY docker/env-config.sh /docker-entrypoint.d/40-env-config.sh
+RUN chmod +x /docker-entrypoint.d/40-env-config.sh
 EXPOSE 80

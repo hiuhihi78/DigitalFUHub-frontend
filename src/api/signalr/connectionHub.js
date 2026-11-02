@@ -1,8 +1,9 @@
 import * as signalR from '@microsoft/signalr';
+import config from '~/config';
 
 import { getTokenInCookies } from "~/utils/index"
 
-const baseURL = process.env.REACT_APP_API_BASE_URL;
+const baseURL = config.apiBaseUrl;
 
 const connectionHub = (hubName) => {
     return new signalR.HubConnectionBuilder()

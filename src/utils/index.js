@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import config from '~/config';
 import { format, register } from 'timeago.js';
 import jwtDecode from 'jwt-decode'
 import CryptoJS from 'crypto-js';
@@ -49,7 +50,7 @@ export const getUser = () => {
 
 export const saveJwtIdToCookies = (jwtId) => {
     Cookies.remove('_tid');
-    Cookies.set('_tid', jwtId, { expires: process.env.REACT_APP_TOKEN_EXPIRES_TIME });
+    Cookies.set('_tid', jwtId, { expires: config.tokenExpiresTime });
 };
 
 export const saveDataAuthToCookies = (uid, token, refreshToken, jwtId) => {
